@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ادخل عقلك — عرض تقديمي تفاعلي في علم النفس</title>
+<meta name="description" content="عرض تقديمي تفاعلي يستعرض كيف تؤثر الاختيارات على تفسير الشخصية في علم النفس.">
+<meta name="theme-color" content="#1f5a7a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== الشريط العلوي وشريط التقدم ===== -->
+  <header class="topbar">
+    <div class="topbar__row">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">ادخل عقلك</span>
+        <span class="brand__sep" aria-hidden="true">/</span>
+        <span class="brand__sub">عرض تفاعلي</span>
+      </div>
+      <p class="step" id="stepLabel" aria-live="polite">الشريحة <b>١</b> من ٦</p>
+    </div>
+    <div class="progress" id="progressBar" role="progressbar" aria-label="تقدم العرض" aria-valuemin="0" aria-valuemax="100" aria-valuenow="17">
+      <div class="progress__fill" id="progressFill"></div>
+    </div>
+  </header>
+
+  <!-- ===== مسرح الشرائح ===== -->
+  <main class="stage" id="stage">
+
+    <!-- ١. الغلاف -->
+    <section class="slide slide--cover is-active" data-index="0" aria-labelledby="hCover" aria-hidden="false">
+      <div class="slide__inner">
+        <div class="cover">
+          <div class="cover__text">
+            <p class="eyebrow rise">عرض تقديمي تفاعلي · علم النفس</p>
+            <h1 class="cover__title rise" id="hCover">ادخل <span class="cover__accent">عقلك</span></h1>
+            <p class="cover__lead rise">عرض تقديمي تفاعلي يستعرض كيف تؤثر الاختيارات على تفسير الشخصية في علم النفس.</p>
+            <p class="cover__note rise">لا توجد إجابات صحيحة أو خاطئة؛ كل اختيار يفتح نافذة على طريقة تنظيمك للعالم، لا على حقيقتك كاملة.</p>
+            <div class="cover__actions rise">
+              <button class="btn btn--primary" id="startBtn" type="button">ابدأ العرض</button>
+              <span class="cover__hint">التنقل بأسهم لوحة المفاتيح ← →</span>
+            </div>
+            <ul class="cover__meta rise">
+              <li>٦ شرائح</li>
+              <li>تفاعل مباشر</li>
+              <li>بدون موسيقى أو مؤثرات صوتية</li>
+            </ul>
+          </div>
+          <div class="cover__art" aria-hidden="true">
+            <span class="ring ring--1"></span>
+            <span class="ring ring--2"></span>
+            <span class="ring ring--3"></span>
+            <span class="ring ring--dash"></span>
+            <span class="core"></span>
+            <span class="spark spark--1"></span>
+            <span class="spark spark--2"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ٢. اختر بابك -->
+    <section class="slide" data-index="1" aria-labelledby="hDoors" aria-hidden="true">
+      <div class="slide__inner">
+        <header class="slide__head rise">
+          <p class="eyebrow">الشريحة الثانية</p>
+          <h2 class="slide__title" id="hDoors">اختر بابك</h2>
+          <p class="slide__lead">ثلاثة أبواب متطابقة في الشكل، مختلفة في المعنى. حين تتساوى الخيارات في ظاهرها، يصبح الميل نحو أحدها تعبيراً عن أولويات داخلية لا عن صواب أو خطأ.</p>
+        </header>
+
+        <div class="doors-view rise" id="doorsView">
+          <div class="doors" id="doorsGrid" role="group" aria-label="اختر أحد الأبواب الثلاثة">
+            <button class="door" type="button" data-door="first" aria-label="الباب الأول">
+              <span class="door__face">
+                <span class="door__num">١</span>
+                <span class="door__knob"></span>
+              </span>
+              <span class="door__label">الباب الأول</span>
+            </button>
+            <button class="door" type="button" data-door="second" aria-label="الباب الثاني">
+              <span class="door__face">
+                <span class="door__num">٢</span>
+                <span class="door__knob"></span>
+              </span>
+              <span class="door__label">الباب الثاني</span>
+            </button>
+            <button class="door" type="button" data-door="third" aria-label="الباب الثالث">
+              <span class="door__face">
+                <span class="door__num">٣</span>
+                <span class="door__knob"></span>
+              </span>
+              <span class="door__label">الباب الثالث</span>
+            </button>
+          </div>
+          <p class="hint">اضغط على أحد الأبواب لعرض التحليل النفسي المرتبط به.</p>
+        </div>
+
+        <div class="analysis" id="doorAnalysis" hidden aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ٣. الغابة أم البحر -->
+    <section class="slide slide--nature" data-index="2" aria-labelledby="hNature" aria-hidden="true">
+      <div class="slide__inner">
+        <header class="slide__head rise">
+          <p class="eyebrow">الشريحة الثالثة</p>
+          <h2 class="slide__title" id="hNature">الغابة أم البحر</h2>
+          <p class="slide__lead">مشهدان طبيعيان يطلبان منك شيئاً واحداً: أين تودّ أن تقف الآن؟ الاختيار هنا قرينة على الميول، لا مقياس لها.</p>
+        </header>
+
+        <div class="places rise" id="places">
+          <button class="place place--forest" type="button" data-place="forest" aria-pressed="false">
+            <span class="place__scene" aria-hidden="true">
+              <span class="sun sun--forest"></span>
+              <span class="tree tree--1"></span>
+              <span class="tree tree--2"></span>
+              <span class="tree tree--3"></span>
+              <span class="tree tree--4"></span>
+              <span class="ground"></span>
+            </span>
+            <span class="place__badge">اختيارك</span>
+            <span class="place__body">
+              <span class="place__title">الغابة</span>
+              <span class="place__sub">ظلّ، وتدرّج، ومسارات تُكتشف خطوة بخطوة</span>
+            </span>
+          </button>
+
+          <button class="place place--sea" type="button" data-place="sea" aria-pressed="false">
+            <span class="place__scene" aria-hidden="true">
+              <span class="sun sun--sea"></span>
+              <span class="wave wave--1"></span>
+              <span class="wave wave--2"></span>
+              <span class="wave wave--3"></span>
+            </span>
+            <span class="place__badge">اختيارك</span>
+            <span class="place__body">
+              <span class="place__title">البحر</span>
+              <span class="place__sub">أفق مفتوح، وإيقاع متكرر، وحدود لا تُرى</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="insight insight--wide" id="placeInsight" aria-live="polite">
+          <p class="insight__empty">اختر أحد المشهدين ليظهر التفسير النفسي المرتبط به.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ٤. الخدعة البصرية -->
+    <section class="slide" data-index="3" aria-labelledby="hIllusion" aria-hidden="true">
+      <div class="slide__inner">
+        <header class="slide__head rise">
+          <p class="eyebrow">الشريحة الرابعة</p>
+          <h2 class="slide__title" id="hIllusion">الخدعة البصرية</h2>
+          <p class="slide__lead">انظر إلى الشكل: ماذا ترى أولاً؟ قد ترى وجهين متقابلين، وقد ترى مزهرية بينهما. لا تتعجّل الجواب، فالدماغ يحسم الأمر قبل أن تدرك أنه اختار.</p>
+        </header>
+
+        <div class="illusion rise">
+          <figure class="figure" id="figure" data-view="none">
+            <div class="figure__stage" id="figureStage" role="button" tabindex="0" aria-label="شكل متبادل: وجهان متقابلان أو مزهرية. اضغط لتبديل الشكل والأرضية.">
+              <svg class="figure__svg" viewBox="0 0 300 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect class="fig-bg" x="0" y="0" width="300" height="430"/>
+                <path class="fig-face" d="M 0 0 L 96 0 C 96.7 2.7 98.5 11 100 16 C 101.5 21 103.5 25.7 105 30 C 106.5 34.3 108.2 38.3 109 42 C 109.8 45.7 111.2 48.7 110 52 C 108.8 55.3 102.7 58.3 102 62 C 101.3 65.7 104.3 69.7 106 74 C 107.7 78.3 109.7 83.3 112 88 C 114.3 92.7 120.7 98.3 120 102 C 119.3 105.7 109.2 107.2 108 110 C 106.8 112.8 113.3 116.5 113 119 C 112.7 121.5 106 122.7 106 125 C 106 127.3 113.3 130 113 133 C 112.7 136 104 139.7 104 143 C 104 146.3 113.7 149.5 113 153 C 112.3 156.5 104.5 159.8 100 164 C 95.5 168.2 90.5 173 86 178 C 81.5 183 76.8 188.3 73 194 C 69.2 199.7 65.7 205.3 63 212 C 60.3 218.7 58.5 226.3 57 234 C 55.5 241.7 54.5 249.7 54 258 C 53.5 266.3 53.3 275.3 54 284 C 54.7 292.7 56.2 301.3 58 310 C 59.8 318.7 62.3 327.7 65 336 C 67.7 344.3 70.8 352.3 74 360 C 77.2 367.7 81 374.7 84 382 C 87 389.3 90 396 92 404 C 94 412 95.3 425.7 96 430 L 0 430 Z"/>
+                <path class="fig-face" d="M 0 0 L 96 0 C 96.7 2.7 98.5 11 100 16 C 101.5 21 103.5 25.7 105 30 C 106.5 34.3 108.2 38.3 109 42 C 109.8 45.7 111.2 48.7 110 52 C 108.8 55.3 102.7 58.3 102 62 C 101.3 65.7 104.3 69.7 106 74 C 107.7 78.3 109.7 83.3 112 88 C 114.3 92.7 120.7 98.3 120 102 C 119.3 105.7 109.2 107.2 108 110 C 106.8 112.8 113.3 116.5 113 119 C 112.7 121.5 106 122.7 106 125 C 106 127.3 113.3 130 113 133 C 112.7 136 104 139.7 104 143 C 104 146.3 113.7 149.5 113 153 C 112.3 156.5 104.5 159.8 100 164 C 95.5 168.2 90.5 173 86 178 C 81.5 183 76.8 188.3 73 194 C 69.2 199.7 65.7 205.3 63 212 C 60.3 218.7 58.5 226.3 57 234 C 55.5 241.7 54.5 249.7 54 258 C 53.5 266.3 53.3 275.3 54 284 C 54.7 292.7 56.2 301.3 58 310 C 59.8 318.7 62.3 327.7 65 336 C 67.7 344.3 70.8 352.3 74 360 C 77.2 367.7 81 374.7 84 382 C 87 389.3 90 396 92 404 C 94 412 95.3 425.7 96 430 L 0 430 Z" transform="translate(300,0) scale(-1,1)"/>
+              </svg>
+            </div>
+            <figcaption class="figure__cap">شكل مستوحى من «مزهرية روبن» (١٩١٥) — انقر على الشكل لتبديل الشكل والأرضية</figcaption>
+          </figure>
+
+          <div class="illusion__panel">
+            <p class="mini-label">ماذا رأيت أولاً؟</p>
+            <div class="choice-row">
+              <button class="btn btn--ghost" type="button" data-illusion="faces" aria-pressed="false">الوجه الأول</button>
+              <button class="btn btn--ghost" type="button" data-illusion="vase" aria-pressed="false">الوجه الثاني</button>
+            </div>
+            <p class="hint hint--start">الوجه الأول: الوجهان المتقابلان · الوجه الثاني: المزهرية. إن لم تتبيّن المزهرية، ركّز على الفراغ الفاتح بين الوجهين لا على الحدود.</p>
+            <div class="insight" id="illusionInsight" aria-live="polite">
+              <p class="insight__empty">لم تُثبّت رؤيتك بعد. اختر أحد الوجهين لعرض تفسير الإدراك البصري.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ٥. اللون المفضل -->
+    <section class="slide slide--color" id="slideColor" data-index="4" aria-labelledby="hColor" aria-hidden="true">
+      <div class="slide__inner">
+        <header class="slide__head rise">
+          <p class="eyebrow">الشريحة الخامسة</p>
+          <h2 class="slide__title" id="hColor">اللون المفضل</h2>
+          <p class="slide__lead">أربعة ألوان، ودلالات متباينة في علم نفس اللون. اختر اللون الذي يجذبك أولاً، ثم اقرأ التفسير بوصفه احتمالاً لا حكماً.</p>
+        </header>
+
+        <div class="colors rise" id="colors" role="group" aria-label="اختر لوناً">
+          <button class="swatch" type="button" data-color="blue" style="--swatch:#1f5a7a" aria-pressed="false">
+            <span class="swatch__dot" aria-hidden="true"></span>
+            <span class="swatch__name">الأزرق</span>
+            <span class="swatch__hex">#1f5a7a</span>
+          </button>
+          <button class="swatch" type="button" data-color="green" style="--swatch:#3f7d5a" aria-pressed="false">
+            <span class="swatch__dot" aria-hidden="true"></span>
+            <span class="swatch__name">الأخضر</span>
+            <span class="swatch__hex">#3f7d5a</span>
+          </button>
+          <button class="swatch" type="button" data-color="red" style="--swatch:#9b3b34" aria-pressed="false">
+            <span class="swatch__dot" aria-hidden="true"></span>
+            <span class="swatch__name">الأحمر</span>
+            <span class="swatch__hex">#9b3b34</span>
+          </button>
+          <button class="swatch" type="button" data-color="violet" style="--swatch:#6b4a7a" aria-pressed="false">
+            <span class="swatch__dot" aria-hidden="true"></span>
+            <span class="swatch__name">البنفسجي</span>
+            <span class="swatch__hex">#6b4a7a</span>
+          </button>
+        </div>
+
+        <div class="insight insight--wide" id="colorInsight" aria-live="polite">
+          <p class="insight__empty">اختر لوناً لتتغيّر خلفية العرض ويظهر تفسيره في علم نفس الألوان.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ٦. النتيجة والخاتمة -->
+    <section class="slide slide--result" data-index="5" aria-labelledby="hResult" aria-hidden="true">
+      <div class="slide__inner">
+        <header class="slide__head rise">
+          <p class="eyebrow">الشريحة السادسة · الخاتمة</p>
+          <h2 class="slide__title" id="hResult">النتيجة والخاتمة</h2>
+          <p class="slide__lead">هذا ملخّص لاختياراتك وتفسيرها النفسي. اقرأه كخطٍّ واحد من خطوط التفسير، لا كصورة نهائية عنك.</p>
+        </header>
+
+        <div class="summary rise" id="summary" aria-live="polite"></div>
+
+        <div class="reference rise">
+          <div class="reference__mark" aria-hidden="true">§</div>
+          <div class="reference__body">
+            <p class="reference__label">مرجع</p>
+            <h3 class="reference__title">مبادئ عامة في علم النفس</h3>
+            <p class="reference__text">تستند تفسيرات هذا العرض إلى مبادئ عامة في علم النفس: نظرية الاختيار في تلبية الحاجات الأساسية، وعلم النفس الجشطلتي في تنظيم الإدراك (الشكل والأرضية)، والنموذج الخمسي للشخصية في وصف الانفتاح على الخبرة، وعلم نفس الألوان في دلالاتها السياقية. وهي تفسيرات تعليمية تأمّلية لا تُعدّ تشخيصاً نفسياً ولا تُغني عن رأي مختص.</p>
+          </div>
+        </div>
+
+        <div class="result__actions rise">
+          <button class="btn btn--primary" id="restartBtn" type="button">إعادة العرض</button>
+          <span class="result__hint">سيتم مسح اختياراتك والبدء من الشريحة الأولى.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== شريط التنقل السفلي ===== -->
+  <footer class="navbar">
+    <button class="nav-btn" id="prevBtn" type="button">
+      <span class="nav-btn__arrow" aria-hidden="true">→</span>
+      <span>السابق</span>
+    </button>
+
+    <nav class="dots" id="dots" aria-label="التنقل المباشر بين الشرائح"></nav>
+
+    <button class="nav-btn nav-btn--next" id="nextBtn" type="button">
+      <span class="nav-btn__arrow" aria-hidden="true">←</span>
+      <span>التالي</span>
+    </button>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= البيانات ================= */
+  var DATA = {
+    doors: {
+      first: {
+        title: 'الباب الأول',
+        tag: 'الحاجة إلى الأمان والانتماء',
+        short: 'أولوية الاستقرار وتقليل المخاطرة',
+        paragraphs: [
+          'من يختار الباب الأول يميل، في هذا التمرين، إلى إعطاء الأولوية للحاجة إلى الأمان والانتماء. فحين تتساوى الخيارات في ظاهرها، يصبح الميل اللاواعي نحو الأقل إثارةً والأكثر ألفةً تعبيراً عن رغبة في تقليل المخاطرة والحفاظ على الاستقرار.',
+          'وتفسّر نظرية الاختيار عند وليام غلاسر السلوك بأنه محاولة دائمة لتلبية حاجات أساسية خمس: البقاء، والانتماء، والقوة، والحرية، والمرح. ويُستدل من تفضيل خيارٍ آمن على أن حاجة الانتماء والاستقرار تحتلّ موقعاً متقدماً في أولويات الشخص في تلك اللحظة.',
+          'ولا يعني ذلك جبناً أو انطواءً بالضرورة، بل قد يعكس نضجاً في تقدير الكلفة والمكسب، أو حاجة ظرفية إلى الاستقرار بعد فترة من التغيّر.'
+        ]
+      },
+      second: {
+        title: 'الباب الثاني',
+        tag: 'الحاجة إلى الحرية والاستكشاف',
+        short: 'قابلية أعلى لتحمّل الغموض',
+        paragraphs: [
+          'اختيار الباب الثاني يوحي بأولوية الحاجة إلى الحرية والاستكشاف. فالباب المفتوح على ما لا يُرى يرمز إلى قابلية عالية لتحمّل الغموض، وهي سمة ترتبط في نموذج العوامل الخمسة للشخصية بالانفتاح على الخبرة: الخيال، والفضول، والاستعداد لتجربة الجديد.',
+          'وقد يقرأ صاحب هذا الاختيار الموقف بوصفه فرصة لا خطراً، فيُقدّم المكسب المحتمل على الأمان المضمون. وترى نظرية الاختيار أن الحرية حاجة أساسية لا رفاهية؛ إذ يشعر الفرد بأنه فاعل حين يملك هامشاً من الاختيار داخل قيود الواقع.',
+          'والحدّ الفاصل بين الاستكشاف والاندفاع ليس في الاختيار نفسه، بل في قدرة الشخص على تقدير النتائج والرجوع عن القرار عند الحاجة.'
+        ]
+      },
+      third: {
+        title: 'الباب الثالث',
+        tag: 'الحاجة إلى المعرفة والإنجاز',
+        short: 'بحث عن المعنى وقابلية للتقييم',
+        paragraphs: [
+          'من يختار الباب الثالث يميل إلى تفضيل ما يوحي بالمعنى والتاريخ: بابٌ ثقيل، يحمل أثر من سبقوه. ويرتبط هذا التفضيل بالحاجة إلى المعرفة والفهم، وبحاجة الإنجاز التي وصفها ماكليلاند، حيث يُقاس الدافع إلى الإنجاز بميل الفرد إلى مهام ذات معيار واضح ونتيجة يمكن تقييمها.',
+          'وقد يعني الاختيار أيضاً حاجة إلى القوة النفسية بمعناها عند غلاسر: الرغبة في أن يكون المرء ذا أثر، لا مجرد عابر. إلا أن الإفراط في تقدير المعنى قد يتحول إلى ترددٍ أمام الخيارات البسيطة، حين يُنتظر من كل قرار أن يكون «الأصح».',
+          'وهذه قراءة احتمالية: فالباب نفسه قد يُختار بدافع الفضول، أو الاعتياد، أو حتى الرغبة في المخالفة.'
+        ]
+      }
+    },
+
+    places: {
+      forest: {
+        title: 'الغابة',
+        tag: 'النظام والنمو',
+        short: 'ميل إلى الاستقرار والنمو التدريجي',
+        paragraphs: [
+          'اختيار الغابة يُقرأ عادةً بوصفه ميلاً إلى بيئة منظمة، متدرجة، تسمح بالانتباه الهادئ والاستبطان. وتشير نظرية استعادة الانتباه عند كابلان إلى أن البيئات الطبيعية تخفّف إجهاد الانتباه الموجَّه، لأنها تجذب الانتباه بأسلوب لطيف لا يستهلك الطاقة الذهنية.',
+          'وقد يعكس الاختيار حاجة إلى الاستقرار والنمو التدريجي: فالغابة لا تُرى كاملة من نقطة واحدة، بل تُكتشف خطوة بخطوة. ويرتبط ذلك بميل إلى التخطيط والصبر على المدى الطويل، مع تحفّظ واضح على تعميم هذا الاستنتاج على الشخصية كلها.'
+        ]
+      },
+      sea: {
+        title: 'البحر',
+        tag: 'الانفتاح والاتساع',
+        short: 'قدرة على مرافقة عدم اليقين',
+        paragraphs: [
+          'من يختار البحر يميل، في هذا التمرين، إلى قيم الاتساع والانفتاح والغموض المحتمل. فالبحر مشهد بلا حدود ظاهرة، يتطلب قبول الفهم الجزئي ومرافقة عدم اليقين، وهو ما يرتبط بالانفتاح على الخبرة وبقدرة أعلى على تحمّل الغموض.',
+          'كما تُظهر أبحاث البيئات الزرقاء ارتباطاً بين القرب من الماء وتحسّن المزاج والاسترخاء، ويُفسَّر ذلك جزئياً بخصائص المشهد: صوت متكرر، وأفق مفتوح، وإيقاع هادئ يخفف الإثارة الفسيولوجية.',
+          'وقد يدل الاختيار على حاجة إلى التحرر من التفاصيل والانضباط المفرط، أو على رغبة في التعامل مع المشاعر بوصفها حركةً لا حالةً ثابتة.'
+        ]
+      }
+    },
+
+    illusion: {
+      faces: {
+        title: 'الوجهان المتقابلان',
+        tag: 'إدراك الوجوه',
+        short: 'الوجه أولاً: الشكل والأرضية',
+        paragraphs: [
+          'إذا رأيت الوجهين أولاً، فأنت تمنح المساحة الداكنة صفة «الشكل» وتجعل المساحة الفاتحة «أرضية». يفسّر ذلك بمبدأ الشكل والأرضية في علم نفس الجشطالت: ينتقي الإدراك ما يُثبته كموضوع، ويؤجّل الباقي إلى الخلفية.',
+          'والميل إلى رؤية الوجه قبل المزهرية ليس عشوائياً؛ فالإنسان مزوّد بجهاز عصبي متخصص في معالجة الوجوه، ويستجيب لها أسرع مما يستجيب للأشكال المجرّدة، لما للوجوه من أهمية اجتماعية. وهو ما يظهر أيضاً في ظاهرة رؤية الوجوه في الأشكال العشوائية (الباريدوليا).'
+        ]
+      },
+      vase: {
+        title: 'المزهرية',
+        tag: 'التنظيم الإدراكي',
+        short: 'الفراغ أولاً: بناء التفسير البصري',
+        paragraphs: [
+          'إذا رأيت المزهرية أولاً، فقد ثبّتت الفراغ الفاتح شكلاً والوجوه أرضية. والمثير أن الشكل نفسه يحمل تفسيرين صحيحين، ويُسمّى هذا النوع «الأشكال المتبادلة»، حيث يتبادل الشكل والأرضية الدور عند تغيير نقطة التثبيت.',
+          'ويعني ذلك أن الإدراك ليس تسجيلاً سلبياً للواقع، بل عملية بناءٍ نشطة ينتقي فيها الدماغ أفضل تفسير متاح للبيانات البصرية. والانتقال بين التفسيرين يدل على أن الجهاز الإدراكي لا يستطيع تثبيت الفرضيتين معاً في اللحظة نفسها.'
+        ]
+      }
+    },
+
+    colors: {
+      blue: {
+        name: 'الأزرق',
+        hex: '#1f5a7a',
+        tint: '#08202e',
+        tag: 'الثقة والهدوء',
+        short: 'عقلانية ومسافة تأملية',
+        paragraphs: [
+          'يرتبط الأزرق في أدبيات علم نفس اللون بالهدوء والثقة والانضباط، وتُفسَّر آثاره جزئياً بانخفاض الإثارة الفسيولوجية مقارنة بالألوان الدافئة. ومن يفضّله يميل غالباً إلى تقييم المواقف بعقلانية، وإلى البحث عن مسافة تأملية بينه وبين الانفعال.',
+          'وقد يعكس الاختيار حاجة إلى الوضوح والاتساق، أو رغبة في أن يُدرَك الشخص بوصفه متزناً وموثوقاً.'
+        ]
+      },
+      green: {
+        name: 'الأخضر',
+        hex: '#3f7d5a',
+        tint: '#09241b',
+        tag: 'التوازن والنمو',
+        short: 'اعتدال وصبر على المدى الطويل',
+        paragraphs: [
+          'يرتبط الأخضر بالتوازن والنمو والطمأنينة، ويُستدعى في أدبيات التصميم بوصفه لوناً منخفض الإثارة يخفف التعب البصري. وقد يعكس تفضيله ميلاً إلى الاعتدال والاستقرار، وقدرة على تحمّل الإيقاع البطيء.',
+          'غالباً ما يُقرأ هذا الاختيار أيضاً بوصفه رغبة في التجديد: العودة إلى نقطة اتزان بعد فترة من الجهد أو الضغط.'
+        ]
+      },
+      red: {
+        name: 'الأحمر',
+        hex: '#9b3b34',
+        tint: '#241211',
+        tag: 'الطاقة والحسم',
+        short: 'حضور وتعبير مباشر',
+        paragraphs: [
+          'يرتبط الأحمر بالطاقة والاندفاع والانتباه؛ فهو لون عالي الإثارة يستدعي انتباهاً فورياً. وقد يعكس تفضيله حاجة إلى الحسم والحضور، أو ميلاً إلى التعبير المباشر عن الانفعال بدل كبته.',
+          'وفي المقابل، قد يدل الاختيار على رغبة في الاستثارة وتجنّب الرتابة أكثر من دلالة على العدوانية، وهو لبس شائع في القراءات الشعبية للألوان.'
+        ]
+      },
+      violet: {
+        name: 'البنفسجي',
+        hex: '#6b4a7a',
+        tint: '#1b1224',
+        tag: 'التأمل والتميّز',
+        short: 'اهتمام بالمعنى والرمز',
+        paragraphs: [
+          'يرتبط البنفسجي بالتأمل والخيال والتميّز، ويحمل في كثير من الثقافات دلالة على الرسمية والعمق. قد يشير تفضيله إلى نزعة تأملية، وإلى اهتمام بالمعنى أكثر من المظهر، مع حساسية أعلى للتفاصيل الرمزية.',
+          'ومن الشائع أيضاً أن يُختار هذا اللون بدافع الرغبة في التفرّد، أي في أن يُقرأ الاختيار نفسه كإشارة إلى ذوق مختلف.'
+        ]
+      }
+    }
+  };
+
+  var EMPTY = {
+    door: { short: 'لم تختر باباً', note: 'يمكنك العودة إلى الشريحة الثانية واختيار أحد الأبواب.' },
+    place: { short: 'لم تختر مشهداً', note: 'يمكنك العودة إلى الشريحة الثالثة واختيار الغابة أو البحر.' },
+    illusion: { short: 'لم تحدّد رؤيتك', note: 'يمكنك العودة إلى الشريحة الرابعة واختيار أحد الوجهين.' },
+    color: { short: 'لم تختر لوناً', note: 'يمكنك العودة إلى الشريحة الخامسة واختيار أحد الألوان.' }
+  };
+
+  /* ================= الحالة ================= */
+  var STORAGE_KEY = 'madkhal-choices-v1';
+  var state = { door: null, place: null, illusion: null, color: null };
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var stage = document.getElementById('stage');
+  var progressBar = document.getElementById('progressBar');
+  var progressFill = document.getElementById('progressFill');
+  var stepLabel = document.getElementById('stepLabel');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var dotsWrap = document.getElementById('dots');
+  var doorsView = document.getElementById('doorsView');
+  var doorsGrid = document.getElementById('doorsGrid');
+  var doorAnalysis = document.getElementById('doorAnalysis');
+  var placeInsight = document.getElementById('placeInsight');
+  var illusionInsight = document.getElementById('illusionInsight');
+  var colorInsight = document.getElementById('colorInsight');
+  var figure = document.getElementById('figure');
+  var figureStage = document.getElementById('figureStage');
+  var summary = document.getElementById('summary');
+  var slideColor = document.getElementById('slideColor');
+  var index = 0;
+
+  var AR_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  function ar(n) { return String(n).replace(/\d/g, function (d) { return AR_DIGITS[+d]; }); }
+
+  /* ================= التخزين ================= */
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* التخزين المحلي قد يكون معطّلاً */ }
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return;
+      if (parsed.door && DATA.doors[parsed.door]) state.door = parsed.door;
+      if (parsed.place && DATA.places[parsed.place]) state.place = parsed.place;
+      if (parsed.illusion && DATA.illusion[parsed.illusion]) state.illusion = parsed.illusion;
+      if (parsed.color && DATA.colors[parsed.color]) state.color = parsed.color;
+    } catch (e) { /* تجاهل بيانات غير صالحة */ }
+  }
+
+  /* ================= بناء النصوص ================= */
+  function paragraphs(list) {
+    return list.map(function (p) { return '<p class="insight__p">' + p + '</p>'; }).join('');
+  }
+
+  function insightMarkup(item, extraChip) {
+    return (
+      '<div class="insight__head">' +
+        '<span class="chip">' + item.tag + '</span>' +
+        (extraChip || '') +
+        '<h3 class="insight__title">' + item.title + '</h3>' +
+      '</div>' +
+      paragraphs(item.paragraphs)
+    );
+  }
+
+  /* ================= الشريحة ٢: الأبواب ================= */
+  function renderDoor() {
+    if (!state.door) {
+      doorsView.hidden = false;
+      doorAnalysis.hidden = true;
+      doorAnalysis.innerHTML = '';
+      return;
+    }
+    var item = DATA.doors[state.door];
+    doorsView.hidden = true;
+    doorAnalysis.hidden = false;
+    doorAnalysis.innerHTML =
+      insightMarkup(item) +
+      '<div class="analysis__foot">' +
+        '<button class="btn btn--ghost" type="button" data-back="door">عودة</button>' +
+        '<span class="analysis__note">اختيارك محفوظ وسيظهر في شريحة النتيجة.</span>' +
+      '</div>';
+  }
+
+  /* ================= الشريحة ٣: الغابة أم البحر ================= */
+  function renderPlace() {
+    var buttons = document.querySelectorAll('[data-place]');
+    Array.prototype.forEach.call(buttons, function (btn) {
+      var picked = state.place === btn.getAttribute('data-place');
+      btn.classList.toggle('is-picked', picked);
+      btn.setAttribute('aria-pressed', picked ? 'true' : 'false');
+    });
+    document.getElementById('places').classList.toggle('has-pick', !!state.place);
+
+    if (!state.place) {
+      placeInsight.className = 'insight insight--wide';
+      placeInsight.innerHTML = '<p class="insight__empty">اختر أحد المشهدين ليظهر التفسير النفسي المرتبط به.</p>';
+    } else {
+      var item = DATA.places[state.place];
+      placeInsight.className = 'insight insight--wide insight--filled ' + (state.place === 'forest' ? 'insight--forest' : 'insight--sea');
+      placeInsight.innerHTML = insightMarkup(item);
+    }
+    syncTone();
+  }
+
+  /* ================= الشريحة ٤: الخدعة البصرية ================= */
+  function renderIllusion() {
+    var buttons = document.querySelectorAll('[data-illusion]');
+    Array.prototype.forEach.call(buttons, function (btn) {
+      var picked = state.illusion === btn.getAttribute('data-illusion');
+      btn.classList.toggle('is-picked', picked);
+      btn.setAttribute('aria-pressed', picked ? 'true' : 'false');
+    });
+    figure.setAttribute('data-view', state.illusion || 'none');
+
+    if (!state.illusion) {
+      illusionInsight.className = 'insight';
+      illusionInsight.innerHTML = '<p class="insight__empty">لم تُثبّت رؤيتك بعد. اختر أحد الوجهين لعرض تفسير الإدراك البصري.</p>';
+    } else {
+      illusionInsight.className = 'insight insight--filled';
+      illusionInsight.innerHTML = insightMarkup(DATA.illusion[state.illusion]);
+    }
+  }
+
+  /* ================= الشريحة ٥: اللون ================= */
+  function renderColor() {
+    var buttons = document.querySelectorAll('[data-color]');
+    Array.prototype.forEach.call(buttons, function (btn) {
+      var picked = state.color === btn.getAttribute('data-color');
+      btn.classList.toggle('is-picked', picked);
+      btn.setAttribute('aria-pressed', picked ? 'true' : 'false');
+    });
+
+    if (!state.color) {
+      slideColor.style.removeProperty('--picked');
+      colorInsight.className = 'insight insight--wide';
+      colorInsight.innerHTML = '<p class="insight__empty">اختر لوناً لتتغيّر خلفية العرض ويظهر تفسيره في علم نفس الألوان.</p>';
+    } else {
+      var item = DATA.colors[state.color];
+      slideColor.style.setProperty('--picked', item.hex);
+      colorInsight.className = 'insight insight--wide insight--filled';
+      colorInsight.innerHTML =
+        '<div class="insight__head">' +
+          '<span class="chip">' + item.tag + '</span>' +
+          '<h3 class="insight__title">' +
+            '<span class="insight__dot" style="background:' + item.hex + '"></span>' + item.name +
+            '<span class="insight__hex">' + item.hex + '</span>' +
+          '</h3>' +
+        '</div>' +
+        paragraphs(item.paragraphs) +
+        '<p class="insight__caveat">تنبيه أكاديمي: تتأثر دلالات الألوان بالثقافة والسياق والخبرة الشخصية، والأدلة على ربطها بالشخصية محدودة؛ فتُقرأ هذه التفسيرات بوصفها تأمّلاً لا حكماً.</p>';
+    }
+    syncTone();
+  }
+
+  /* ================= الشريحة ٦: الملخص ================= */
+  function renderSummary() {
+    var rows = [
+      { key: 'الباب', value: state.door ? DATA.doors[state.door].title : null, short: state.door ? DATA.doors[state.door].short : EMPTY.door.short, note: EMPTY.door.note },
+      { key: 'المشهد', value: state.place ? DATA.places[state.place].title : null, short: state.place ? DATA.places[state.place].short : EMPTY.place.short, note: EMPTY.place.note },
+      { key: 'الإدراك', value: state.illusion ? DATA.illusion[state.illusion].title : null, short: state.illusion ? DATA.illusion[state.illusion].short : EMPTY.illusion.short, note: EMPTY.illusion.note },
+      { key: 'اللون', value: state.color ? DATA.colors[state.color].name : null, short: state.color ? DATA.colors[state.color].short : EMPTY.color.short, note: EMPTY.color.note }
+    ];
+
+    var pickedCount = 0;
+    var html = rows.map(function (row) {
+      if (row.value) pickedCount++;
+      return (
+        '<article class="summary__card' + (row.value ? '' : ' is-empty') + '">' +
+          '<p class="summary__key">' + row.key + '</p>' +
+          '<p class="summary__value">' + (row.value || 'لم تختر') + '</p>' +
+          '<p class="summary__text">' + (row.value ? row.short : row.note) + '</p>' +
+        '</article>'
+      );
+    }).join('');
+
+    html +=
+      '<p class="summary__closing">' +
+        (pickedCount === 4
+          ? 'اكتملت اختياراتك الأربعة. اجمعها في صورة واحدة، ثم اسأل: أيّها يشبهني أكثر، وأيّها اخترته بدافع اللحظة؟'
+          : 'أكملت ' + ar(pickedCount) + ' من ٤ اختيارات. يمكنك العودة إلى أي شريحة لإكمال ما تبقّى.') +
+      '</p>';
+
+    summary.innerHTML = html;
+  }
+
+  /* ================= لون خلفية العرض ================= */
+  function syncTone() {
+    var tone = '#0a1c26';
+    if (index === 0) tone = '#08161f';
+    if (index === 2 && state.place) tone = state.place === 'forest' ? '#0a211a' : '#08202e';
+    if (index === 4 && state.color) tone = DATA.colors[state.color].tint;
+    stage.style.backgroundColor = tone;
+    if (state.color) document.documentElement.style.setProperty('--picked', DATA.colors[state.color].hex);
+  }
+
+  /* ================= التنقل ================= */
+  function buildDots() {
+    slides.forEach(function (s, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'dot';
+      b.setAttribute('aria-label', 'الشريحة ' + ar(i + 1));
+      b.addEventListener('click', function () { goTo(i); });
+      dotsWrap.appendChild(b);
+    });
+  }
+
+  function updateChrome() {
+    var pct = Math.round(((index + 1) / slides.length) * 100);
+    progressFill.style.width = pct + '%';
+    progressBar.setAttribute('aria-valuenow', String(pct));
+    stepLabel.innerHTML = 'الشريحة <b>' + ar(index + 1) + '</b> من ' + ar(slides.length);
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === slides.length - 1;
+    Array.prototype.forEach.call(dotsWrap.children, function (dot, i) {
+      dot.classList.toggle('is-active', i === index);
+      if (i === index) { dot.setAttribute('aria-current', 'true'); }
+      else { dot.removeAttribute('aria-current'); }
+    });
+  }
+
+  function applySlide(i) {
+    index = i;
+    slides.forEach(function (s, k) {
+      var active = k === index;
+      s.classList.toggle('is-active', active);
+      s.setAttribute('aria-hidden', active ? 'false' : 'true');
+      s.inert = !active;
+    });
+
+    var current = slides[index];
+    current.scrollTop = 0;
+
+    if (index === 1) renderDoor();
+    if (index === 2) renderPlace();
+    if (index === 3) renderIllusion();
+    if (index === 4) renderColor();
+    if (index === 5) renderSummary();
+
+    updateChrome();
+    syncTone();
+    try { history.replaceState(null, '', '#slide-' + (index + 1)); } catch (err) {}
+  }
+
+  function goTo(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    if (i === index) return;
+    applySlide(i);
+  }
+
+  function next() { goTo(index + 1); }
+  function prev() { goTo(index - 1); }
+
+  /* ================= الأحداث ================= */
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+  document.getElementById('startBtn').addEventListener('click', function () { goTo(1); });
+
+  doorsGrid.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-door]');
+    if (!btn) return;
+    state.door = btn.getAttribute('data-door');
+    save();
+    renderDoor();
+    syncTone();
+    doorAnalysis.querySelector('[data-back]').focus();
+  });
+
+  doorAnalysis.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-back]')) return;
+    state.door = null;
+    save();
+    renderDoor();
+    var firstDoor = doorsGrid.querySelector('[data-door]');
+    if (firstDoor) firstDoor.focus();
+  });
+
+  document.getElementById('places').addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-place]');
+    if (!btn) return;
+    state.place = btn.getAttribute('data-place');
+    save();
+    renderPlace();
+  });
+
+  function setIllusion(value) {
+    state.illusion = value;
+    save();
+    renderIllusion();
+  }
+
+  figureStage.addEventListener('click', function () {
+    setIllusion(state.illusion === 'vase' ? 'faces' : 'vase');
+  });
+  figureStage.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setIllusion(state.illusion === 'vase' ? 'faces' : 'vase');
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    var ill = e.target.closest('[data-illusion]');
+    if (ill) { setIllusion(ill.getAttribute('data-illusion')); return; }
+    var col = e.target.closest('[data-color]');
+    if (col) {
+      state.color = col.getAttribute('data-color');
+      save();
+      renderColor();
+    }
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', function () {
+    state = { door: null, place: null, illusion: null, color: null };
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    document.documentElement.style.removeProperty('--picked');
+    stage.style.backgroundColor = '';
+    renderDoor();
+    renderPlace();
+    renderIllusion();
+    renderColor();
+    renderSummary();
+    goTo(0);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    var tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+    if (e.key === 'ArrowLeft') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    else if (e.key === 'End') { e.preventDefault(); goTo(slides.length - 1); }
+  });
+
+  /* ================= التهيئة ================= */
+  buildDots();
+  load();
+  renderDoor();
+  renderPlace();
+  renderIllusion();
+  renderColor();
+  renderSummary();
+
+  (function initFromHash() {
+    var m = /^#slide-(\d+)$/.exec(location.hash);
+    if (m) {
+      var target = parseInt(m[1], 10) - 1;
+      if (target > 0 && target < slides.length) {
+        applySlide(target);
+        return;
+      }
+    }
+    slides.forEach(function (s, i) { s.inert = i !== 0; });
+    updateChrome();
+    syncTone();
+  })();
+})();
+</script>
+
+</body>
+</html>
